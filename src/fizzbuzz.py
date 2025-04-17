@@ -42,4 +42,8 @@ def generate_fizz_buzz_for_range(
     end: int,
     fizz_buzz_func: Callable[[int], str]
 ) -> Iterator[str]:
-    pass
+      for number in range(start, end + 1):
+        # Call the injected function to get the FizzBuzz string
+        result = fizz_buzz_func(number)
+        # Yield the result to make this function a generator
+        yield result
