@@ -81,3 +81,29 @@ def generate_fizz_buzz_for_range(
         result = fizz_buzz_func(number)
         # Yield the result to make this function a generator
         yield result
+
+
+if __name__ == "__main__":
+    start_number = 1
+    end_number = 20
+
+    print(f"--- FizzBuzz sequence from {start_number} to {end_number} ---")
+
+    try:
+        fizzbuzz_sequence = generate_fizz_buzz_for_range(
+            start_number, end_number, get_fizz_buzz_string
+        )
+
+        for item in fizzbuzz_sequence:
+            print(item)
+
+    except InvalidRangeException as e:
+        print(f"\nError generating sequence: {e}")
+        print(
+            "Please ensure start/end values in the script are valid (1-100, start <= end)."
+        )
+    except InvalidInputTypeException as e:
+        print(f"\nError generating sequence: {e}")
+        print("Please ensure start/end values in the script are integers.")
+
+    print("--- End of sequence ---")
