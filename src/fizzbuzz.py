@@ -40,9 +40,29 @@ def get_fizz_buzz_string(number: int) -> str:
 def generate_fizz_buzz_for_range(
     start: int,
     end: int,
-    fizz_buzz_func: Callable[[int], str]
+    fizz_buzz_func: Callable[[int], str] = get_fizz_buzz_string
 ) -> Iterator[str]:
-      
+    """Generates FizzBuzz strings for a sequence of numbers within a defined range.
+
+    Args:
+        start (int): The starting integer of the range (inclusive). Must be >= 1.
+        end (int): The ending integer of the range (inclusive). Must be <= 100.
+        fizz_buzz_func (Callable[[int], str]): A function that accepts an integer
+            and returns its corresponding FizzBuzz string representation.
+            This allows for dependency injection of the core FizzBuzz logic.
+
+    Yields:
+        Iterator[str]: An iterator that produces the FizzBuzz string generated
+            by `fizz_buzz_func` for each number in the sequence from `start`
+            to `end`.
+
+    Raises:
+        InvalidInputTypeException: If `start` or `end` are not integers.
+        InvalidRangeException: If `start` < 1, `end` > 100, or `start` > `end`.
+        # Note: TypeError might also be implicitly raised during iteration
+        # if fizz_buzz_func is not actually callable, but this function's
+        # explicit validation covers the input range types.
+    """
     if not isinstance(start, int):
         raise InvalidInputTypeException("Start value must be an integer.")
     if not isinstance(end, int):
