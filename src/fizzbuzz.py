@@ -1,6 +1,8 @@
 import logging
 from typing import Callable, Iterator
 from src.exceptions import InvalidInputTypeException, InvalidRangeException
+
+
 def get_fizz_buzz_string(number: int) -> str:
     """Generates the FizzBuzz string representation for a single integer.
 
@@ -25,8 +27,8 @@ def get_fizz_buzz_string(number: int) -> str:
     num_str = str(number)
     suffix = ""
 
-    divisible_by_3 = (number % 3 == 0)
-    divisible_by_5 = (number % 5 == 0)
+    divisible_by_3 = number % 3 == 0
+    divisible_by_5 = number % 5 == 0
 
     if divisible_by_3 and divisible_by_5:
         suffix = " fizzbuzz"
@@ -37,10 +39,9 @@ def get_fizz_buzz_string(number: int) -> str:
 
     return num_str + suffix
 
+
 def generate_fizz_buzz_for_range(
-    start: int,
-    end: int,
-    fizz_buzz_func: Callable[[int], str] = get_fizz_buzz_string
+    start: int, end: int, fizz_buzz_func: Callable[[int], str] = get_fizz_buzz_string
 ) -> Iterator[str]:
     """Generates FizzBuzz strings for a sequence of numbers within a defined range.
 
@@ -74,7 +75,7 @@ def generate_fizz_buzz_for_range(
         raise InvalidRangeException("End must be <= 100.")
     if start > end:
         raise InvalidRangeException("Start cannot be greater than end.")
-    
+
     for number in range(start, end + 1):
         # Call the injected function to get the FizzBuzz string
         result = fizz_buzz_func(number)
